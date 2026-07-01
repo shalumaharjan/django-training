@@ -127,5 +127,25 @@ Note: Django template renders from server so is SEO friendly
 
 **Day 3:**
 
+1. **Makes file for modules, if run stored in db**
+
+python manage.py makemigrations
+
+2\. **stores in db -> table**
+
+python manage.py migrate
+
+3\. **Create user that is super user for Django admin panel**
+
+python manage.py createsuperuser
+
+4\. **Types of views in Django:** function based, classic based - object oriented, generic view
+
+5\. **Handles python's images**
+
+pip install Pillow
+
+6\. 
+
 
 

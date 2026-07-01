@@ -14,7 +14,7 @@ class WebsiteSettings(models.Model):
     site_logo = models.ImageField(upload_to='site_logo/')
     site_favicon = models.ImageField(upload_to='site_favicon/')
     contact_email = models.EmailField(unique=True)
-    contact_phont = models.CharField(max_length=20)
+    contact_phone = models.CharField(max_length=20)
     address = models.TextField(max_length=255, blank=False, null=False)
     company_name = models.CharField(max_length=255, blank=False, null=False)
     company_pan = models.IntegerField()
@@ -25,7 +25,7 @@ class WebsiteSettings(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.site_name
+        return self.company_name
 
 DOCUMENT_TYPR_CHOICES = [
     ('company_pan', 'Company PAN'),
@@ -37,6 +37,7 @@ class CompanyDocument(models.Model):
     document_name = models.CharField(max_length=255, blank=False, null=False)
     document_file = models.FileField(upload_to='company_documents/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
+    company = models.ForeignKey(WebsiteSettings, on_delete=models.CASCADE, related_name='documents')
 
     def __str__(self):
         return self.document_name
