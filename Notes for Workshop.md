@@ -145,7 +145,7 @@ python manage.py createsuperuser
 
 pip install Pillow
 
-6\. 
+\--------------------
 
 
 
