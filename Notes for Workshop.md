@@ -125,3 +125,7 @@ Note: Django template renders from server so is SEO friendly
 
 \--------------------
 
+**Day 3:**
+
+
+
