@@ -14,3 +14,8 @@ admin.site.register(CompanyDocument)
 
 # using decorator to register the model with the admin site
 # @register(MetaDescription)
+
+# changing admin panel site settings
+admin.site.site_header = "My E-commerce"
+admin.site.site_title = "Admin Panel"
+admin.site.index_title = "Welcome to E-commerce Admin Panel"
