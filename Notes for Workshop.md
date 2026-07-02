@@ -147,5 +147,12 @@ pip install Pillow
 
 \--------------------
 
+**Day 4:**
 
+New Product Module
+
+1. **defining meta data ->** class Meta:
+2. **ModelForm ->**  it is a class, present attributes in form directly, by default inherits Form class
+3. **makes the form elements in <p>** **->** category\_form.as\_p in html
+4. **generates token, in backend Django check it for no SQLinjection->** {% csrf\_token %}
 
