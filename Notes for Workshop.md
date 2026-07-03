@@ -156,3 +156,9 @@ New Product Module
 3. **makes the form elements in <p>** **->** category\_form.as\_p in html
 4. **generates token, in backend Django check it for no SQLinjection->** {% csrf\_token %}
 
+\--------------------
+
+**Day 5:**
+
+**Product form ->** CRUD operation
+
