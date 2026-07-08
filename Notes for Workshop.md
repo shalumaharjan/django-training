@@ -162,3 +162,11 @@ New Product Module
 
 **Product form ->** CRUD operation
 
+\--------------------
+
+**Day 6:**
+
+**Message Display ->** alert, success etc
+
+Next part: Pagination
+
