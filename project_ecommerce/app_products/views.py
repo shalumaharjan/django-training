@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from app_products.forms import ProductCategoryForm, ProductForm, ProductImageForm
 from app_products.models import ProductCategory, Product, ProductImage
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 # Create your views here.
 def product_category_create(request):
@@ -49,11 +50,28 @@ def product_create(request):
         }
         return render(request, "products/product_form.html", context)
 
-def product_index(request):
+def product_index(request, *args, **kwargs):
     """
     This view is responsible for displaying all the products in the database.
     """
-    products = Product.objects.all() # similar to SELECT * FROM products in SQL
+
+    # for searching products by name and description
+    search_query = request.GET.get("search", "")
+    
+    products = Product.objects.all() # returns all the products
+    if search_query:
+        products = products.filter(title__icontains=search_query) | products.filter(description__icontains=search_query)
+
+    #for pagination, we can use Django's built-in pagination features if needed.
+    # Example pagination, adjust as needed
+    # products = products.paginate(request.GET.get("page", 1), per_page = 10)
+    
+    # or using using Django's built-in Paginator class for more control
+    paginator = Paginator(products, 5) # 5 products per page
+
+    page_number = request.GET.get("page")
+    products = paginator.get_page(page_number)
+
     context = {
         "products": products
     }

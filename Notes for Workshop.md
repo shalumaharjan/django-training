@@ -170,3 +170,12 @@ New Product Module
 
 Next part: Pagination
 
+\--------------------
+
+**Day 7:**
+
+1. **Pagination, search bar for products**
+2. **Landing page redesign**
+
+Next part: backend part, images, static files
+
