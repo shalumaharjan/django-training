@@ -179,3 +179,9 @@ Next part: Pagination
 
 Next part: backend part, images, static files
 
+\--------------------
+
+**Day 8:**
+
+1. Making static files: css and js
+
