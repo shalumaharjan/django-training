@@ -185,3 +185,22 @@ Next part: backend part, images, static files
 
 1. Making static files: css and js
 
+\--------------------
+
+**Day 9:**
+
+1. pip install environs
+2. **User Register \& Verification Code in email**
+
+
+
+##### **Workflow:**
+
+1. Login -> Dashboard after verify only
+
+2\. Register -> success -> verification code(email) -> Dashboard after verify only
+
+3\. If email not same -> create new pool for re-send verification code
+
+\--------------------
+

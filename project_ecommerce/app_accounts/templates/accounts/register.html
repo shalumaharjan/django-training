@@ -1,0 +1,9 @@
+{% extends 'layouts/base.html' %} {% block title %} Register Page {% endblock %}
+{% block body_content %}
+<form class="form" method="POST">
+  {% csrf_token %} {{ form_data }}
+
+  <input type="submit" value="Register" class="btn btn-primary" />
+</form>
+
+{% endblock %}
