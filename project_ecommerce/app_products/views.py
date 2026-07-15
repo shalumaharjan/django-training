@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from app_products.forms import ProductCategoryForm, ProductForm, ProductImageForm
 from app_products.models import ProductCategory, Product, ProductImage
 from django.contrib import messages
@@ -82,8 +82,10 @@ def product_view(request, pk):
     This view is responsible for displaying a single product based on its primary key (pk).
     """
     product = Product.objects.get(pk=pk) # similar to SELECT * FROM products WHERE id = pk in SQL
+    product_images = ProductImage.objects.filter(product=product).order_by('img_order')
     context = {
-        "product": product
+        "product": product,
+        "product_images": product_images
     }
     return render(request, "products/product_detail.html", context)
 
@@ -126,31 +128,28 @@ def product_delete(request, pk):
     return redirect("product.index")
 
 def product_image_add(request, product_id):
-    """
-    This view is responsible for creating a new product image for a specific product.
-    """
-    product = Product.objects.get(pk=product_id)
+    product = get_object_or_404(Product, pk=product_id)
 
     if request.method == "POST":
-        request_data = request.POST
-        request_files = request.FILES
-        form_data = ProductImageForm(request_data, request_files)
+        images = request.FILES.getlist('image')
+        orders = request.POST.getlist('img_order')
 
-        if form_data.is_valid():
-            product_image = form_data.save(commit=False)
-            product_image.product = product
-            product_image.save()
-            messages.success(request, "Product image added successfully!")
-            return redirect("product.view", pk=product_id)
-        else:
-            messages.error(request, "Error adding product image. Please check the form for errors.")
-            return redirect("product.view", pk=product_id)
+        for i, image in enumerate(images):
+            ProductImage.objects.create(
+                product=product,
+                image=image,
+                img_order=int(orders[i]) if i < len(orders) and orders[i] else 0,
+                is_featured=(i == 0)
+            )
+
+        messages.success(request, "Images added successfully!")
+        return redirect("product.view", pk=product_id)
     else:
-        product_image_form = ProductImageForm()
-        context = {
-            "product_image_form": product_image_form,
-            "product": product,
-            "title": "Add Product Image",
-            "button_text": "Add Image"
-        }
-        return render(request, "products/product_image_form.html",context)
+        form = ProductImageForm()
+
+    return render(request, "products/product_image_form.html", {
+        "product_image_form": form,
+        "product": product,
+        "title": "Add Product Images",
+        "button_text": "Upload Images"
+    })

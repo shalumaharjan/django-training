@@ -9,14 +9,14 @@
 
   <h1>{{ title }}</h1>
 
-  {% include 'partials/messages.html' %}
+  {% include "partials/messages.html" %}
 
   <form
     method="post"
     action="{% if product_image_form.instance.id %}
-        {% url 'produc_image.edit' product_image_form.instance.id %}
+            {% url 'product_image.edit' product_image_form.instance.id %}
         {% else %}
-        {% url 'product_image.create' product.id %}
+            {% url 'product_image.create' product.id %}
         {% endif %}"
     class="d-flex flex-column border border-1 box-shadow p-3 mb-5 bg-light"
     enctype="multipart/form-data"
